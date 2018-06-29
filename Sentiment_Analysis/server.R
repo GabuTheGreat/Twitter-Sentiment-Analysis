@@ -70,7 +70,7 @@ shinyServer(function(input, output) {
   
   output$more_trends <- renderUI({
     selectInput("select", "All Trending Topics", 
-                choices = all_trends, selected = "Gikomba")
+                choices = all_trends, selected = all_trends[1])
   })
   
   #Create a function to search Twitter
