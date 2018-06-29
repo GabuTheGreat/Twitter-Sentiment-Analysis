@@ -61,19 +61,28 @@ analysing_tweets  = function(search_tweets){
   return(d)
 }
 
+#search all trends in Nairobi
+#Use this function to get WOEID for Nairobi > closestTrendLocations(-1.2921,36.8219)
+trends = getTrends(1528488)
+all_trends = trends$name
 
 shinyServer(function(input, output) {
+  
+  output$more_trends <- renderUI({
+    selectInput("select", "All Trending Topics", 
+                choices = all_trends, selected = "Gikomba")
+  })
   
   #Create a function to search Twitter
   search_tweets <- reactive({
     #Get Trend/Keyword and Search Twitter using searchTwitter function   
-    my_search = input$trend
+    my_search = input$select
     no_tweets = input$no_tweets
     trend_search <- searchTwitter(my_search, n = no_tweets, lang="en")
     trend_search = twListToDF(trend_search)
     return(trend_search)
   })
-  
+
   #Create a function to analyse data obtained
   cleaned_data <- reactive({
     

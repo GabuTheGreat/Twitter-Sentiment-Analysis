@@ -14,8 +14,7 @@ shinyUI(fluidPage(
       #The number of Tweets to search
       numericInput("no_tweets", "Number of Tweets:", 100),
       #The Keyword and Twitter handle to search
-      textInput("trend", label = h5("Trend Search"), 
-                value = "Gikomba")                   
+      uiOutput("more_trends")
     ),
     
     # Show a plot of the generated distribution
